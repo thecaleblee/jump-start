@@ -5,6 +5,7 @@ npm install
 
 # Directory structure should look as follows:
 
+```
   /project
   |
   |-app
@@ -19,6 +20,7 @@ npm install
   |  |-js
   |  |-fonts
   |  |-images
+```
 
 # Gulp Commands
 gulp
