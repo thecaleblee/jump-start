@@ -1,5 +1,11 @@
+// import our custom BS variables file
+@import 'variables';
+
+// import main BS router file to get all BS css
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
 body {
-  text-align: center;
+  background-image: url($image-base + 'body-bg.png');
+  background-repeat: repeat;
+  background-position: top left;
 }
