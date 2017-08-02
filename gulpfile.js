@@ -1,5 +1,6 @@
 var gulp         = require('gulp');
 var sass         = require('gulp-sass');
+var php          = require('gulp-connect-php');
 var browserSync  = require('browser-sync').create();
 var useref       = require('gulp-useref');
 var gulpIf       = require('gulp-if');
@@ -28,25 +29,31 @@ gulp.task('sass', function() {
     }))
 });
 
+gulp.task('php', function() {
+  php.server({
+    base: 'app',
+    port: 8010,
+    keepalive: true
+  });
+});
+
 // watch app and run different tasks
 gulp.task('watch', ['browserSync', 'sass'], function() {
   gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('app/**/*.html', browserSync.reload);
+  gulp.watch('app/**/*.php', browserSync.reload);
   gulp.watch('app/js/**/*.js', browserSync.reload);
 });
 
 // live reload
-gulp.task('browserSync', function() {
+gulp.task('browserSync', ['php'], function() {
   browserSync.init({
-    server: {
-      baseDir: 'app'
-    }
+    proxy: 'http://127.0.0.1:8010/'
   })
 });
 
 // concat files and ugilfy them
 gulp.task('useref', function() {
-  return gulp.src('app/**/*.html')
+  return gulp.src('app/**/*.php')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
