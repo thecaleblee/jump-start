@@ -2,7 +2,7 @@
 @import 'variables';
 
 // import main BS router file to get all BS css
-@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
 body {
   background-image: url($image-base + 'body-bg.png');
