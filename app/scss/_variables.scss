@@ -6,6 +6,11 @@
 
 /******** CUSTOM VARIABLES *******/
 $image-base: '/images/';
+$text-gray: #5B6064;
+$beige-lighest: #EDEAE5;
+$beige-light: #EAE4DC;
+$beige: #E3DED8;
+$beige-dark: #DDD8CE;
 
 
 
@@ -39,9 +44,9 @@ $brand-danger:          #d9534f !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #EDEAE5;
+$body-bg:               $beige-lighest;
 //** Global text color on `<body>`.
-$text-color:            #5B6064;
+$text-color:            $text-gray;
 
 //** Global textual link color.
 $link-color:            $brand-primary !default;

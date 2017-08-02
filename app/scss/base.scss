@@ -10,6 +10,26 @@ body {
   background-position: top left;
 }
 
+// Navigation
 .navbar-default {
   box-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+// Section wrappers
+.secondary {
+  background-color: rgba(221, 216, 206, .7);
+  border-top: rgb(221, 216, 206);
+  border-bottom: rgb(221, 216, 206);
+}
+
+// Base overrides //
+.container {
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    margin-top: 10px;
+  }
 }
