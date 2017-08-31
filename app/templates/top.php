@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Jump Start</title>
-    <meta name="description" content="Jump Start">
+    <title>Xbox Live API</title>
+    <meta name="description" content="Xbox Live API">
     <meta name="author" content="Taran Pierce">
     <link rel="stylesheet" href="css/base.css">
     <!--[if lt IE 9]>
