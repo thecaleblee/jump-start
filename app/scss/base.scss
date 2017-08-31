@@ -15,7 +15,6 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,.4);
 }
 
-// Section wrappers
 .secondary {
   background-color: rgba(221, 216, 206, .7);
   border-top: rgb(221, 216, 206);
@@ -31,5 +30,19 @@ body {
   > h5,
   > h6 {
     margin-top: 10px;
+  }
+}
+
+// Footer
+.sticky {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  &.bottom {
+    bottom: 0;
+  }
+  &.top {
+    top: 0;
   }
 }
