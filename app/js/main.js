@@ -1,40 +1,40 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  console.log('DOMContentLoaded!')
+  // set up form
+  getUserProfile();
 });
 
-function stickyFooterInit(element) {
-  var $stickyFooter = $(element);
-  var footerHeight = $stickyFooter.height();
-  var distanceToBottomOfPage = window.innerHeight;
-  var elementOffSet = $stickyFooter.offset().top;
+function getUserProfile() {
+  var $form = $('#user-profile');
+  var $button = $form.find('button');
 
-  if ( distanceToBottomOfPage > ( elementOffSet + footerHeight ) ) {
-    $stickyFooter.addClass('sticky bottom');
-  } else {
-    $stickyFooter.removeClass('sticky bottom');
-  }
+  $button.on('click', function(e) {
+    e.preventDefault();
+
+    // set up query information
+    var gamerTag = $form.find('[name="gamer_tag"]').val();
+    var query = 'gamer_tag=' + gamerTag;
+
+    // set up ajax call
+    var xmlhttp = new XMLHttpRequest();
+
+    // prepare the ajax call
+    xmlhttp.onreadystatechange = function() {
+
+      // if we get good results store the object
+      if (this.readyState == 4 && this.status == 200) {
+        var obj = JSON.parse(this.responseText);
+        console.log(obj);
+      }
+    };
+
+    // create url path
+    var url = "/helpers/get-user-info.php?";
+    // add query parameters
+    url = url + query;
+
+    // open and send request
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  });
+
 }
-
-
-(function() {
-  window.addEventListener("resize", resizeThrottler, false);
-
-  var resizeTimeout;
-  function resizeThrottler() {
-    // ignore resize events as long as an actualResizeHandler execution is in the queue
-    if ( !resizeTimeout ) {
-      resizeTimeout = setTimeout(function() {
-        resizeTimeout = null;
-        actualResizeHandler();
-     
-       // length of delay
-       }, 750);
-    }
-  }
-
-  function actualResizeHandler() {
-    console.log('I ran!');
-    stickyFooterInit($('footer'));
-  }
-
-}());

@@ -16,6 +16,20 @@
       <li>Check out game stats and compare against friends</li>
       <li>and much more!</li>
     </ul>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>Find Xbox User</h3>
+        <p>Pull up an Xbox user and find out their current status as well as a few other details about them.</p>
+        <form id="user-profile">
+          <input name="gamer_tag" id="gamer_tag" type="text" />
+          <button type="submit">Find</button>
+        </form>
+      </div>
+      <div class="col-sm-6">
+        <div class="user-card-container">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <?php include 'templates/bottom.php' ?>
