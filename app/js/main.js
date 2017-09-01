@@ -11,11 +11,15 @@ function getUserProfile() {
   var url = '/helpers/get-user-info.php?';
   var $view = $('#user-card');
   var options = {};
+  var loadingIcon = '<i class="fa fa-spinner" aria-hidden="true"></i>';
 
   $button.on('click', function(e) {
     e.preventDefault();
 
     $view.removeClass('loaded');
+    $view.addClass('loading');
+
+    $view.append(loadingIcon);
 
     // set up query information
     options.view = 'user-card';
@@ -28,29 +32,29 @@ function getUserProfile() {
 
 // TODO is this generic enough to be used with all routes?
 function ajaxRequest(url, options) {
-    // set up ajax call
-    var xmlhttp = new XMLHttpRequest();
+  // set up ajax call
+  var xmlhttp = new XMLHttpRequest();
 
-    // prepare the ajax call
-    xmlhttp.onreadystatechange = function(data) {
+  // prepare the ajax call
+  xmlhttp.onreadystatechange = function(data) {
 
-      // if we get good results store the object
-      if (this.readyState == 4 && this.status == 200) {
-        var obj = JSON.parse(this.responseText);
-        options.response = obj;
-      }
-    };
-
-    // build url with query
-    var endpoint = url + options.query;
-
-    // open and send request
-    xmlhttp.open("GET", endpoint, true);
-    xmlhttp.send();
-
-    xmlhttp.onloadend = function(pe) {
-      renderView(options);
+    // if we get good results store the object
+    if (this.readyState == 4 && this.status == 200) {
+      var obj = JSON.parse(this.responseText);
+      options.response = obj;
     }
+  };
+
+  // build url with query
+  var endpoint = url + options.query;
+
+  // open and send request
+  xmlhttp.open("GET", endpoint, true);
+  xmlhttp.send();
+
+  xmlhttp.onloadend = function(pe) {
+    renderView(options);
+  }
 }
 
 // Render view after receiving data
@@ -61,8 +65,9 @@ function renderView(options) {
   $view.empty();
 
   // remove loaded class
-  $view.removeClass('loaded');
+  $view.removeClass('loaded, loading');
 
+  // determine which view to render
   if (options.view == 'user-card') {
     renderGamerCard($view, options);
   }
@@ -72,7 +77,7 @@ function renderView(options) {
 function renderGamerCard($view, options) {
   var playerData = options.response;
   var content = '<div class="content"></div>';
-  var button = '<a class="btn btn-primary btn-block" href="#">View Player Profile</a>';
+  var button = '<a class="btn btn-primary btn-block" href="/player-profile.php?id=' + playerData.id + '">View Player Profile</a>';
 
   // setup tenure level
   var gamer_tenure_level = '<span class="badge pull-right">' + playerData.TenureLevel + '</span>';
@@ -89,17 +94,21 @@ function renderGamerCard($view, options) {
   // create reputation
   var gamer_reputation = '<h5 class="bg-success">' + playerData.XboxOneRep + ' with Gamerscore of <b>' + gamer_score + '</b></h5>';
 
+  // add title and reputation to container
   $view.append(gamer_tag_title);
   $view.append(gamer_reputation);
 
+  // add in content container
   $view.append(content);
 
+  // make it a jQuery object
   var $viewContent = $view.find('.content');
 
+  // add in gamer pic and button to more player info
   $viewContent.append(gamer_tag_pic);
-
   $viewContent.append(button);
 
+  // view is ready to be seen now
   $view.addClass('loaded');
 
   console.log('renderGamerCard playerData: ', playerData);

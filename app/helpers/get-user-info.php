@@ -1,9 +1,6 @@
 <?php
   # pull in conf file
-  include "../../conf/config.php";
-
-  # set token
-  $token = $api_key;
+  require( "../../conf/config.php" );
 
   # get gamer tag value
   $gamer_tag = $_GET["gamer_tag"];
@@ -11,15 +8,6 @@
   # End point information 
   $base_url = "https://xboxapi.com/v2";
   $get_xuid = "$base_url/xuid/$gamer_tag";
-
-  # set curl headers
-  $headers = array();
-  $headers[] = "x-auth: $token";
-  $headers[] = "Content-Type: application/json";
-  $headers[] = "Cache-Control: no-cache";
-  $headers[] = "Access-Control-Allow-Origin: *";
-
-
 
 
   # Get the XUID of the gamer tag
