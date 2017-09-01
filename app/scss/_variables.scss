@@ -11,6 +11,7 @@ $beige-lighest: #EDEAE5;
 $beige-light: #EAE4DC;
 $beige: #E3DED8;
 $beige-dark: #DDD8CE;
+$white: #F7F7F7;
 
 
 
@@ -171,7 +172,7 @@ $btn-default-bg:                 #fff !default;
 $btn-default-border:             #ccc !default;
 
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $brand-primary !default;
+$btn-primary-bg:                 #018E01;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
 $btn-success-color:              #fff !default;
@@ -193,9 +194,9 @@ $btn-danger-border:              darken($btn-danger-bg, 5%) !default;
 $btn-link-disabled-color:        $gray-light !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius-base:         $border-radius-base !default;
-$btn-border-radius-large:        $border-radius-large !default;
-$btn-border-radius-small:        $border-radius-small !default;
+$btn-border-radius-base:         0;
+$btn-border-radius-large:        0;
+$btn-border-radius-small:        0;
 
 
 //== Forms

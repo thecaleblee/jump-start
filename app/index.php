@@ -26,8 +26,7 @@
         </form>
       </div>
       <div class="col-sm-6">
-        <div class="user-card-container">
-        </div>
+        <div id="user-card" class="user-card-container"></div>
       </div>
     </div>
   </div>

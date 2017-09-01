@@ -4,6 +4,9 @@
 // import main BS router file to get all BS css
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+// importing partials for custom elements
+@import 'gamer-card';
+
 body {
   background-image: url($image-base + 'body-bg.png');
   background-repeat: repeat;
