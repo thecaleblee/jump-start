@@ -1,6 +1,6 @@
 <?php
   # pull in conf file
-  require( "../../conf/config.php" );
+  require( "../conf/config.php" );
 
   # get gamer tag value
   $xuid = $_GET["id"];
@@ -26,7 +26,4 @@
 
   # close connection
   curl_close($cGamerPresence);
-
-  #printing response to screen
-  echo $gamer_presence;
 ?>
