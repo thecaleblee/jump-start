@@ -11,14 +11,16 @@ function getUserProfile() {
   var url = '/helpers/get-user-info.php?';
   var $view = $('#user-card');
   var options = {};
-  var loadingIcon = '<i class="fa fa-spinner" aria-hidden="true"></i>';
+  var loadingIcon = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>';
 
   $button.on('click', function(e) {
     e.preventDefault();
 
+    // toggle classes for UI
     $view.removeClass('loaded');
     $view.addClass('loading');
 
+    // add in loading icon while ajax call is being made
     $view.append(loadingIcon);
 
     // set up query information
@@ -26,6 +28,7 @@ function getUserProfile() {
     options.gamer_tag = $form.find('[name="gamer_tag"]').val();
     options.query = 'gamer_tag=' + options.gamer_tag;
 
+    // ajax request
     ajaxRequest(url, options);
   });
 }
@@ -52,6 +55,7 @@ function ajaxRequest(url, options) {
   xmlhttp.open("GET", endpoint, true);
   xmlhttp.send();
 
+  // after ajax is returned trigger renderView with that data
   xmlhttp.onloadend = function(pe) {
     renderView(options);
   }
@@ -110,6 +114,4 @@ function renderGamerCard($view, options) {
 
   // view is ready to be seen now
   $view.addClass('loaded');
-
-  console.log('renderGamerCard playerData: ', playerData);
 }

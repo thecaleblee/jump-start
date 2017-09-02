@@ -8,6 +8,22 @@
     opacity: 1;
   }
 
+  &.loading {
+    opacity: 1;
+    min-height: 420px;
+    text-align: center;
+
+    h4,
+    h5,
+    .gamer-logo,
+    .btn {
+      display: none;
+    }
+    .fa-spinner {
+      margin-top: 170px;
+    }
+  }
+
   h4 {
     background-color: rgba(0,0,0,0.8);
     padding: 10px;
@@ -24,6 +40,9 @@
     border-radius: 100%;
     box-shadow: 0 1px 3px rgba(0,0,0,.4);
     max-width: 50%;
-    margin: 10px auto;
+    margin: 18px auto;
+  }
+  .fa {
+    font-size: 80px;
   }
 }

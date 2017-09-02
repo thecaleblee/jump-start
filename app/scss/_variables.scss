@@ -12,6 +12,15 @@ $beige-light: #EAE4DC;
 $beige: #E3DED8;
 $beige-dark: #DDD8CE;
 $white: #F7F7F7;
+$green-dark: #018E01;
+
+
+/***** VENDOR OVERRIDES *****/
+$fa-font-path:        "/node_modules/font-awesome/fonts" !default;
+
+
+
+
 
 
 
@@ -172,7 +181,7 @@ $btn-default-bg:                 #fff !default;
 $btn-default-border:             #ccc !default;
 
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 #018E01;
+$btn-primary-bg:                 $green-dark;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
 $btn-success-color:              #fff !default;
@@ -216,14 +225,14 @@ $input-border:                   #ccc !default;
 // TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
 //** Default `.form-control` border radius
 // This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
-$input-border-radius:            $border-radius-base !default;
+$input-border-radius:            0;
 //** Large `.form-control` border radius
 $input-border-radius-large:      $border-radius-large !default;
 //** Small `.form-control` border radius
 $input-border-radius-small:      $border-radius-small !default;
 
 //** Border color for inputs on focus
-$input-border-focus:             #66afe9 !default;
+$input-border-focus:             $green-dark;
 
 //** Placeholder text color
 $input-color-placeholder:        #999 !default;

@@ -6,29 +6,35 @@
 <section>
   <div class="container">
     <h1>Xbox Live API</h1>
-    <p>Look up any Gamer Tag on Xbox Live and then you can find out extra information about that particular user.</p>
     <div class="row">
       <div class="col-sm-6">
-        <h2>Purpose</h2>
-        <p>I'd like to create an app where people can interact with the Xbox Live API. There are some really neat things that you can do with it, such as:</p>
-        <ul>
-          <li>View details about your account</li>
-          <li>View your recorded screenshots and game clips</li>
-          <li>Send messages with Xbox Live</li>
-          <li>Check out game stats and compare against friends</li>
-          <li>and much more!</li>
-        </ul>
+        <div class="form-container">
+          <h2>Find Xbox User</h2>
+          <p>Search for any Xbox user and pull up a few quick details to verify it's the person you are looking for. You will get a quick glimpse of that user before having to pull up a lot of extra details you may not care about.</p>
+          <hr />
+          <h5>Details:</h5>
+          <ul>
+            <li>Tenure</li>
+            <li>Reputation</li>
+            <li>Gamerscore</li>
+            <li>Gamer pic</li>
+            <li>Link to profile page</li>
+          </ul>
+          <form id="user-profile">
+            <div class="form-group">
+              <label for="gamer_tag">Gamer Tag</label>
+              <input name="gamer_tag" id="gamer_tag" type="text" class="form-control" placeholder="Gamer Tag" />
+            </div>
+            <button class="btn btn-primary btn-lg" type="submit">Find</button>
+          </form>
+        </div>
       </div>
       <div class="col-sm-6">
-        <h3>Find Xbox User</h3>
-        <p>Pull up an Xbox user and find out their current status as well as a few other details about them.</p>
-        <form id="user-profile">
-          <input name="gamer_tag" id="gamer_tag" type="text" />
-          <button type="submit">Find</button>
-        </form>
+        <div id="user-card" class="user-card-container">
+          <i class="fa fa-spinner" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
-    <div id="user-card" class="user-card-container"></div>
   </div>
 </section>
 <?php include 'templates/bottom.php' ?>
