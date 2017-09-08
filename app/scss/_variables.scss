@@ -12,6 +12,7 @@ $beige-light: #EAE4DC;
 $beige: #E3DED8;
 $beige-dark: #DDD8CE;
 $white: #F7F7F7;
+$black: #666;
 $green-dark: #018E01;
 
 
@@ -880,7 +881,7 @@ $pre-scrollable-max-height:   340px !default;
 //** Horizontal offset for forms and lists.
 $component-offset-horizontal: 180px !default;
 //** Text muted color
-$text-muted:                  $gray-light !default;
+$text-muted:                  #ccc;
 //** Abbreviations and acronyms border color
 $abbr-border-color:           $gray-light !default;
 //** Headings small color

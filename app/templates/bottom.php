@@ -6,6 +6,7 @@
     <script type="text/javascript" src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script> 
     <script type="text/javascript" src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script> 
     <script type="text/javascript" src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script> 
+    <script type="text/javascript" src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script> 
     <script type="text/javascript" src="../js/main.js"></script> 
     <!-- endbuild -->
 

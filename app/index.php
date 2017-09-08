@@ -30,9 +30,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div id="user-card" class="user-card-container">
-          <i class="fa fa-spinner" aria-hidden="true"></i>
-        </div>
+        <div id="user-card" class="user-card-container"></div>
       </div>
     </div>
   </div>

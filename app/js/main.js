@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+
+  // set up any tooltips
+  initTooltips();
+
   // set up form
   getUserProfile();
 });
@@ -42,14 +46,29 @@ function ajaxRequest(url, options) {
   xmlhttp.onreadystatechange = function(data) {
 
     // if we get good results store the object
-    if (this.readyState == 4 && this.status == 200) {
+    if ( this.readyState == 4 && this.status == 200) {
+      // check to see if we got an empty response
+      if (!this.responseText) {
+        console.log('AJAX: There was no response on ' + this.responseURL + '!');
+
+        console.log('AJAX: Here are your options: ', options);
+
+        return;
+      }
+
+      // create response object
       var obj = JSON.parse(this.responseText);
+
+      // store to options object
       options.response = obj;
     }
   };
 
   // build url with query
-  var endpoint = url + options.query;
+  var endpoint = url;
+
+  // add query parameter
+  endpoint = url + options.query;
 
   // open and send request
   xmlhttp.open("GET", endpoint, true);
@@ -72,8 +91,14 @@ function renderView(options) {
   $view.removeClass('loaded, loading');
 
   // determine which view to render
-  if (options.view == 'user-card') {
-    renderGamerCard($view, options);
+  if ( options.view == 'user-card' ) {
+    renderGamerCard( $view, options );
+  } else if ( options.view == 'user-game-clips') {
+    renderGamerClips( $view, options ); 
+  } else if ( options.view == 'user-presence' ) {
+    renderPresenceData($view, options);
+  } else if ( options.view == 'user-friends' ) {
+    renderFriendData($view, options);
   }
 }
 
@@ -114,4 +139,72 @@ function renderGamerCard($view, options) {
 
   // view is ready to be seen now
   $view.addClass('loaded');
+}
+
+function getFriendData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-friends.php?';
+  var options = {};
+
+  options.view = 'user-friends';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+function renderFriendData($view, options) {
+  console.log(' renderFriendData options: ', options);
+}
+
+function getPresenceData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-presence.php?';
+  var options = {};
+
+  options.view = 'user-presence';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+function renderPresenceData($view, options) {
+  console.log( 'renderPresenceData options: ', options );
+}
+
+function getGameClipData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-game-clips.php?';
+  var options = {};
+
+  options.view = 'user-game-clips';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+function renderGamerClips($view, options) {
+  console.log( 'renderGamerClips options: ', options );
+}
+
+function initTooltips() {
+  $('[data-toggle="tooltip"]').tooltip();
+}
+
+function getParams(name) {
+  var urlParams = new URLSearchParams(window.location.search);
+
+  var value = '';
+
+  value = urlParams.get(name);
+
+  return value;
 }

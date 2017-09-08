@@ -46,3 +46,36 @@
     font-size: 80px;
   }
 }
+
+.gamer-card-container {
+  background-color: $white;
+  border: 1px solid #ccc;
+
+  h2 {
+    background-color: $green-dark;
+    color: $white;
+    margin-top: 0;
+    padding: 10px;
+
+    .badge {
+      color: $black;
+      background-color: $white; 
+      margin-left: 5px;
+      margin-top: 6px;
+      box-shadow: inset 1px 1px 0 rgba(0,0,0,.5);
+    }
+  }
+  h5 {
+    font-weight: bold;
+  }
+  .content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .avatar {
+    margin: 0 auto;
+  }
+  .player-details {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,35 @@
+.player-details-container {
+  background-color: $white;
+  border: 1px solid #ccc;
+  min-height: 365px;
+
+  &.loading {
+    .content {
+      text-align: center;
+    }
+    .fetching {
+      opacity: 1;
+    }
+  }
+  h3 {
+    background-color: $green-dark;
+    color: $white;
+    margin-top: 0;
+    padding: 13px;
+  }
+  .content {
+    padding: 15px;
+  }
+  .fa-spinner {
+    font-size: 80px;
+    margin: 60px auto;
+  }
+  .fetching {
+    opacity: 0;
+    transition: opactiy 1s ease-in-out;
+
+    h5 {
+      font-weight: bold;
+    }
+  }
+}

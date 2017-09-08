@@ -1,6 +1,6 @@
 <?php
   # pull in conf file
-  require( "../conf/config.php" );
+  require( "../../conf/config.php" );
 
   # get gamer tag value
   $xuid = $_GET["id"];
@@ -10,6 +10,7 @@
 
   # profile endpoint
   $get_gamer_friends = "$base_url/$xuid/friends";
+
 
   # Get Gamer Profile
   $cGamerFriends = curl_init();
@@ -26,4 +27,6 @@
 
   # close connection
   curl_close($cGamerFriends);
+
+  echo $gamer_friends;
 ?>

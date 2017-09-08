@@ -8,6 +8,7 @@
 // importing partials for custom elements
 @import 'form-containers';
 @import 'gamer-card';
+@import 'player-details';
 
 body {
   background-image: url($image-base + 'body-bg.png');
