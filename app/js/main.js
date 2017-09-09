@@ -37,7 +37,11 @@ function getUserProfile() {
   });
 }
 
-// TODO is this generic enough to be used with all routes?
+
+
+// main ajax request
+// collects data and stores in options
+// passes options along to render function
 function ajaxRequest(url, options) {
   // set up ajax call
   var xmlhttp = new XMLHttpRequest();
@@ -80,15 +84,67 @@ function ajaxRequest(url, options) {
   }
 }
 
-// Render view after receiving data
+// get user friend data
+function getFriendData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-friends.php?';
+  var options = {};
+
+  options.view = 'user-friends';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+// get user presence data
+function getPresenceData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-presence.php?';
+  var options = {};
+
+  options.view = 'user-presence';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+// get user game clip data
+function getGameClipData() {
+  var id;
+
+  id = getParams('id');
+
+  var url = '/helpers/get-user-game-clips.php?';
+  var options = {};
+
+  options.view = 'user-game-clips';
+  options.query = 'id=' + id;
+
+  ajaxRequest(url, options);
+}
+
+
+
+// RENDER FUNCTIONS
+// decide which render function to run
+// options contains a view for routing 
 function renderView(options) {
   var $view = $('#' + options.view);
+  var $fetching = $('.fetching');
 
   // clear the view in case something was already there
   $view.empty();
 
   // remove loaded class
   $view.removeClass('loaded, loading');
+
+  $fetching.addClass('hidden');
 
   // determine which view to render
   if ( options.view == 'user-card' ) {
@@ -141,64 +197,63 @@ function renderGamerCard($view, options) {
   $view.addClass('loaded');
 }
 
-function getFriendData() {
-  var id;
-
-  id = getParams('id');
-
-  var url = '/helpers/get-user-friends.php?';
-  var options = {};
-
-  options.view = 'user-friends';
-  options.query = 'id=' + id;
-
-  ajaxRequest(url, options);
-}
-
+// render friend data
 function renderFriendData($view, options) {
-  console.log(' renderFriendData options: ', options);
+  console.log('renderFriendData options: ', options);
+
+  var $friendList = $('#friend-list');
+
+  $friendList.removeClass('text-muted').addClass('loaded');;
+
+  var $friendListContainer = $('#friend-list-table');
+
+  $friendListContainer.addClass('loaded');
+
+  setTimeout(function() {
+    $friendList.addClass('complete');
+  }, 1500);
 }
 
-function getPresenceData() {
-  var id;
-
-  id = getParams('id');
-
-  var url = '/helpers/get-user-presence.php?';
-  var options = {};
-
-  options.view = 'user-presence';
-  options.query = 'id=' + id;
-
-  ajaxRequest(url, options);
-}
-
+// render presence data
 function renderPresenceData($view, options) {
   console.log( 'renderPresenceData options: ', options );
+
+  var $presence = $('#presence');
+
+  $presence.removeClass('text-muted').addClass('loaded');
+
+  var $presenceContainer = $('#presence-table');
+
+  $presenceContainer.addClass('loaded');
+
+  setTimeout(function() {
+    $presence.addClass('complete');
+  }, 1500);
 }
 
-function getGameClipData() {
-  var id;
-
-  id = getParams('id');
-
-  var url = '/helpers/get-user-game-clips.php?';
-  var options = {};
-
-  options.view = 'user-game-clips';
-  options.query = 'id=' + id;
-
-  ajaxRequest(url, options);
-}
-
+// render game clips
 function renderGamerClips($view, options) {
   console.log( 'renderGamerClips options: ', options );
+
+  var $gameList = $('#game-clips');
+
+  $gameList.removeClass('text-muted').addClass('loaded');
+
+  var $gameContainer = $('#game-clip-table');
+
+  $gameContainer.addClass('loaded');
+
+  setTimeout(function() {
+    $gameList.addClass('complete');
+  }, 1500)
 }
 
+// initiate BS tooltips
 function initTooltips() {
   $('[data-toggle="tooltip"]').tooltip();
 }
 
+// grab specific query paramater
 function getParams(name) {
   var urlParams = new URLSearchParams(window.location.search);
 

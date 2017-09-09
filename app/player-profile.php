@@ -1,6 +1,6 @@
 <?php
   # Page Vars
-  $active_link = '/';
+  $active_link = '/player-profile';
 
   # grab some intial data from API call
   # so we can show something while making the other requests 
@@ -21,65 +21,24 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <div class="gamer-card-container">
-          <h2>
-            <?php print_r( $player_data->gamertag ) ?> 
-            <span class="badge pull-right" data-toggle="tooltip" data-placement="top" title="Tier"><?php print_r( $player_data->tier ) ?></span> 
-            <span class="badge pull-right" data-toggle="tooltip" data-placement="top" title="Gamerscore"><?php print_r( $player_data->gamerscore ) ?></span>
-          </h2>
-          <div class="content">
-            <div class="row">
-              <div class="col-sm-6">
-                <img class="img-responsive avatar" alt="<?php print_r( $player_data->gamertag) ?>" src="<?php print_r( $player_data->avatarBodyImagePath ) ?>" />
-              </div>
-              <div class="col-sm-6">
-                <div class="player-details">
-                <?php
-
-                  # TODO all this logic could be put into an include
-
-                  # It is not required to have these filled out
-                  # so make sure they exist before printing the HTML
-
-
-                  # Check to see if they have a Name 
-                  if ( strlen( $player_data->name ) > 0 ) {
-                    print_r( '<h5>Name</h5>');
-                    print_r( "<p>$player_data->name</p>");
-                  }
-
-                  # Check to see if they have a Location 
-                  if ( strlen( $player_data->location ) > 0 ) {
-                    print_r( '<h5>Location</h5>');
-                    print_r( "<p>$player_data->location</p>");
-                  }
-
-                  # Check to see if they have a Bio 
-                  if ( strlen( $player_data->bio ) > 0 ) {
-                    print_r( '<h5>Bio</h5>');
-                    print_r( "<p>$player_data->bio</p>");
-                  }
-
-                  # Check to see if they have a Motto
-                  if ( strlen( $player_data->motto ) > 0 ) {
-                    print_r( '<h5>Motto</h5>');
-                    print_r( "<p>$player_data->motto</p>");
-                  }
-                ?>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php include( 'templates/_gamer-card.php' ) ?>
       </div>
       <div class="col-sm-6">
         <div class="player-details-container loading">
           <h3>Player Details</h3>
-          <ul>
-            <li id="friend-list" class="text-muted">Friend List</li>
-            <li id="game-clips" class="text-muted">Game Clips</li>
-            <li id="presence" class="text-muted">Presence</li>
-            <li id="activity" class="text-muted">Activity</li>
+          <ul class="list-unstyled call-list">
+            <li id="friend-list" class="text-muted">
+              Friend List
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </li>
+            <li id="game-clips" class="text-muted">
+              Game Clips
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </li>
+            <li id="presence" class="text-muted">
+              Presence
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </li>
           </ul>
           <div class="content">
             <div class="fetching">
@@ -88,16 +47,39 @@
               <i class="fa fa-spinner fa-spin"></i>
             </div>
             <div id="player-detail-container">
-              <table id="user-friends" class="table">
-                <tr>
-                  <td>No Data</td>
-                </tr>
-              </table>
-              <table id="user-game-clips" class="table">
-                <tr>
-                  <td>No Data</td>
-                </tr>
-              </table>
+              <div id="game-clip-table" class="panel panel-default">
+                <div class="panel-heading">Recorded Game Clips</div>
+                <div class="panel-body">
+                  <p>Take a look at the game clips they have recorded. Surely they did it for a reason.</p>
+                </div>
+                <table class="table">
+                  <tr>
+                    <td>No Data Yet</td>
+                  </tr>
+                </table>
+              </div>
+              <div id="friend-list-table" class="panel panel-default">
+                <div class="panel-heading">Friend List</div>
+                <div class="panel-body">
+                  <p>Take a look at their friend list to see if you know any one.</p>
+                </div>
+                <table class="table">
+                  <tr>
+                    <td>No Data Yet</td>
+                  </tr>
+                </table>
+              </div>
+              <div id="presence-table" class="panel panel-default">
+                <div class="panel-heading">Player Presence</div>
+                <div class="panel-body">
+                  <p>What kind of player presence do you bring to the table? See whether they are online or not and a few other things.</p>
+                </div>
+                <table class="table">
+                  <tr>
+                    <td>No Data Yet</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>

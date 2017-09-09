@@ -32,4 +32,36 @@
       font-weight: bold;
     }
   }
+  .panel {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+
+    &.loaded {
+      opacity: 1;
+    }
+  }
+  .call-list {
+    padding-left: 15px;
+
+    li {
+      font-weight: bold;
+      transition: color 1s ease-in-out;
+      max-height: 20px;
+
+      &.complete {
+        transition: all 1s ease-in-out;
+        height: 0;
+        overflow: hidden;
+      }
+      &.loaded {
+        .fa {
+          opacity: 1;
+        }
+      }
+      .fa {
+        opacity: 0;
+        transition: opactiy 1s ease-in-out;
+      }
+    }
+  }
 }
