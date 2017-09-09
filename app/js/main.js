@@ -88,14 +88,18 @@ function ajaxRequest(url, options) {
 function getFriendData() {
   var id;
 
+  // grab id from URI
   id = getParams('id');
 
+  // set up route for call and options object
   var url = '/helpers/get-user-friends.php?';
   var options = {};
 
-  options.view = 'user-friends';
+  // set data for API call
+  options.view = 'friend-list-table';
   options.query = 'id=' + id;
 
+  // call ajax function
   ajaxRequest(url, options);
 }
 
@@ -103,14 +107,18 @@ function getFriendData() {
 function getPresenceData() {
   var id;
 
+  // grab id from URI
   id = getParams('id');
 
+  // set up route for call and options object
   var url = '/helpers/get-user-presence.php?';
   var options = {};
 
-  options.view = 'user-presence';
+  // set data for API call
+  options.view = 'presence-table';
   options.query = 'id=' + id;
 
+  // call ajax function
   ajaxRequest(url, options);
 }
 
@@ -118,14 +126,18 @@ function getPresenceData() {
 function getGameClipData() {
   var id;
 
+  // grab id from URI
   id = getParams('id');
 
+  // set up route for call and options object
   var url = '/helpers/get-user-game-clips.php?';
   var options = {};
 
-  options.view = 'user-game-clips';
+  // set data for API call
+  options.view = 'game-clip-table';
   options.query = 'id=' + id;
 
+  // call ajax function
   ajaxRequest(url, options);
 }
 
@@ -136,24 +148,25 @@ function getGameClipData() {
 // options contains a view for routing 
 function renderView(options) {
   var $view = $('#' + options.view);
-  var $fetching = $('.fetching');
 
+  // TODO this is only needed for user-card
+  // fix that
   // clear the view in case something was already there
-  $view.empty();
+  if ( options.view == 'user-card' ) {
+    $view.empty();
+  }
 
   // remove loaded class
   $view.removeClass('loaded, loading');
 
-  $fetching.addClass('hidden');
-
   // determine which view to render
   if ( options.view == 'user-card' ) {
     renderGamerCard( $view, options );
-  } else if ( options.view == 'user-game-clips') {
+  } else if ( options.view == 'game-clip-table') {
     renderGamerClips( $view, options ); 
-  } else if ( options.view == 'user-presence' ) {
+  } else if ( options.view == 'presence-table' ) {
     renderPresenceData($view, options);
-  } else if ( options.view == 'user-friends' ) {
+  } else if ( options.view == 'friend-list-table' ) {
     renderFriendData($view, options);
   }
 }
@@ -199,53 +212,91 @@ function renderGamerCard($view, options) {
 
 // render friend data
 function renderFriendData($view, options) {
-  console.log('renderFriendData options: ', options);
+  // set data to response object
+  var data = options.response;
 
-  var $friendList = $('#friend-list');
-
-  $friendList.removeClass('text-muted').addClass('loaded');;
-
+  // grab the friend container
   var $friendListContainer = $('#friend-list-table');
 
-  $friendListContainer.addClass('loaded');
+  // grab the over all player container
+  var $playerDetailsContainer = $('.player-details-container');
 
-  setTimeout(function() {
-    $friendList.addClass('complete');
-  }, 1500);
+  // check to make sure the response was good first
+  if (data.code == 8) {
+    // it failed add danger classes
+    $friendListContainer.addClass('failed panel-danger');
+
+    // short delay then remove entirely
+    setTimeout(function() {
+      $friendListContainer.remove();
+    }, 2000);
+  } else {
+    // success so add loaded classes
+    $friendListContainer.addClass('loaded panel-success');
+
+    // remove loading class and add loaded class to main container
+    $playerDetailsContainer.removeClass('loading').addClass('loaded');
+  }
 }
 
 // render presence data
 function renderPresenceData($view, options) {
-  console.log( 'renderPresenceData options: ', options );
+  // set data to response object
+  var data = options.response;
+  console.log( 'renderPresenceData data: ', data );
 
-  var $presence = $('#presence');
-
-  $presence.removeClass('text-muted').addClass('loaded');
-
+  // grab presence container
   var $presenceContainer = $('#presence-table');
 
-  $presenceContainer.addClass('loaded');
+  // find the table in that container
+  var $table = $view.find('table');
 
-  setTimeout(function() {
-    $presence.addClass('complete');
-  }, 1500);
+  if ( data.code == 8 ) {
+    // it failed add danger classes
+    $presenceContainer.addClass('failed panel-danger');
+
+    // short delay then remove entirely
+    setTimeout(function() {
+      $presenceContainer.remove();
+    }, 2000);
+  } else {
+    // success so add loaded classes
+    $presenceContainer.addClass('loaded panel-success');
+
+    // add a table row
+    $table.find('tbody').html('<tr>');
+
+
+    // TODO turn this into a loop
+    // create the table cells with data
+    var statusCell = '<td>' + data.state + '</td>';
+    var deviceCell = '<td>' + data.lastSeen.deviceType + '</td>';
+    var lastSeenCell = '<td>' + data.lastSeen.timestamp + '</td>';
+    var titleCell = '<td>' + data.lastSeen.titleName + '</td>';
+
+    // grab the table row
+    var $row = $table.find('tbody tr');
+
+    // append the table cells
+    $row.append(statusCell);
+    $row.append(deviceCell);
+    $row.append(lastSeenCell);
+    $row.append(titleCell);
+  }
 }
 
 // render game clips
 function renderGamerClips($view, options) {
-  console.log( 'renderGamerClips options: ', options );
-
-  var $gameList = $('#game-clips');
-
-  $gameList.removeClass('text-muted').addClass('loaded');
+  var data = options.response;
+  console.log( 'renderGamerClips data: ', data );
 
   var $gameContainer = $('#game-clip-table');
 
-  $gameContainer.addClass('loaded');
-
-  setTimeout(function() {
-    $gameList.addClass('complete');
-  }, 1500)
+  if ( data.code == 8 ) {
+    $gameContainer.addClass('failed panel-danger');
+  } else {
+    $gameContainer.addClass('loaded panel-success');
+  }
 }
 
 // initiate BS tooltips

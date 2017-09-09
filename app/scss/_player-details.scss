@@ -33,11 +33,36 @@
     }
   }
   .panel {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
 
+    &.panel-success {
+      .panel-heading {
+        border-bottom-color: darken($state-success-border, 10%); 
+      }
+    }
+    .panel-heading {
+      font-weight: bold;
+      border-bottom-width: 2px;
+    }
+
+    .fa {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
     &.loaded {
-      opacity: 1;
+      .fa-check {
+        opacity: 1;
+      }
+      .fa-times {
+        display: none;
+      }
+    }
+    &.failed {
+      .fa-check {
+        display: none;
+      }
+      .fa-times {
+        opacity: 1;
+      }
     }
   }
   .call-list {
