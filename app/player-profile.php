@@ -38,10 +38,29 @@
                   <p>Everyone's pride and joy. Take a dig through the gamers recorded game clips.</p>
                   <p>There are surely some cool clips recorded that you can watch.</p>
                 </div>
+                <div class="clip-container"></div>
+              </div>
+              <div id="presence-table" class="panel panel-default">
+                <div class="panel-heading">
+                  Player Presence
+                  <i class="fa fa-check pull-right" aria-hidden="true"></i>
+                  <i class="fa fa-times pull-right" aria-hidden="true"></i>
+                </div>
+                <div class="panel-body">
+                  <p>What kind of player presence do you bring to the table?</p>
+                  <p>Are they online right now? When were they online last? What system did they play on last? Jeez, how much more did you want to know?!</p>
+                </div>
                 <table class="table">
-                  <tr>
-                    <td>No Data Yet</td>
-                  </tr>
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Device</th>
+                      <th>Last Seen</th>
+                      <th>Title</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
                 </table>
               </div>
               <div id="friend-list-table" class="panel panel-default">
@@ -60,28 +79,6 @@
                       <th>Gamer Tag</th>
                       <th>Gamerscore</th>
                       <th>Gamer Pic</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-              <div id="presence-table" class="panel panel-default">
-                <div class="panel-heading">
-                  Player Presence
-                  <i class="fa fa-check pull-right" aria-hidden="true"></i>
-                  <i class="fa fa-times pull-right" aria-hidden="true"></i>
-                </div>
-                <div class="panel-body">
-                  <p>What kind of player presence do you bring to the table? See whether they are online or not and a few other things.</p>
-                </div>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Status</th>
-                      <th>Device</th>
-                      <th>Last Seen</th>
-                      <th>Title</th>
                     </tr>
                   </thead>
                   <tbody>

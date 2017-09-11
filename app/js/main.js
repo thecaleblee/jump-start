@@ -243,7 +243,6 @@ function renderFriendData($view, options) {
 function renderPresenceData($view, options) {
   // set data to response object
   var data = options.response;
-  console.log( 'renderPresenceData data: ', data );
 
   // grab presence container
   var $presenceContainer = $('#presence-table');
@@ -265,37 +264,104 @@ function renderPresenceData($view, options) {
 
     // add a table row
     $table.find('tbody').html('<tr>');
+    $table.find('thead').html('<tr>');
 
-
-    // TODO turn this into a loop
-    // create the table cells with data
-    var statusCell = '<td>' + data.state + '</td>';
-    var deviceCell = '<td>' + data.lastSeen.deviceType + '</td>';
-    var lastSeenCell = '<td>' + data.lastSeen.timestamp + '</td>';
-    var titleCell = '<td>' + data.lastSeen.titleName + '</td>';
-
-    // grab the table row
+    // create data vars 
+    var playerStatus = data.state;
+    var playerDevice;
+    var playerTitle;
+    var playerTime;
+    var $rowHeading = $table.find('thead tr');
     var $row = $table.find('tbody tr');
 
-    // append the table cells
-    $row.append(statusCell);
-    $row.append(deviceCell);
-    $row.append(lastSeenCell);
-    $row.append(titleCell);
+    // create headings
+    var headingStatus = '<th>Status</th>';
+    var headingDevice = '<th>Device</th>';
+    var headingTitle = '<th>Title</th>';
+    var headingTime = '<th>Time Log</th>';
+
+    // TODO turn this into a loop
+    // add headings
+    $rowHeading.append(headingStatus);
+    $rowHeading.append(headingDevice);
+    $rowHeading.append(headingTitle);
+    $rowHeading.append(headingTime);
+
+    // check to see if they are online or offline
+    // response data structure is different if offline
+    if ( playerStatus == 'Online') {
+
+      playerDevice = data.devices[0].type; 
+     
+      playerTitle = data.devices[0].titles[0].name;
+
+      playerTime = data.devices[0].titles[0].lastModified;
+
+    } else {
+
+      playerDevice = data.lastSeen.deviceType; 
+
+      playerTitle = data.lastSeen.titleName;
+
+      playerTime = data.lastSeen.timestamp;
+    }
+
+    playerStatus = '<td>' + playerStatus + '</td>';
+    playerDevice = '<td>' + playerDevice + '</td>';
+    playerTitle = '<td>' + playerTitle + '</td>';
+    playerTime = '<td>' + playerTime + '</td>';
+
+    // TODO turn this into a loop
+    // add data to table
+    $row.append(playerStatus);
+    $row.append(playerDevice);      
+    $row.append(playerTitle);
+    $row.append(playerTime);
   }
 }
 
 // render game clips
 function renderGamerClips($view, options) {
   var data = options.response;
-  console.log( 'renderGamerClips data: ', data );
 
   var $gameContainer = $('#game-clip-table');
 
   if ( data.code == 8 ) {
     $gameContainer.addClass('failed panel-danger');
   } else {
+    // success so add loaded classes
     $gameContainer.addClass('loaded panel-success');
+
+    // make array of game count
+    var gameCount = Object.keys(data); 
+
+    // make game count text
+    gameCount = '<h5>User has ' + gameCount.length + ' game clips</h5>';
+
+    // add it to the panel-body
+    $gameContainer.find('.panel-body').append(gameCount);
+
+    // grab the over all player container
+    var $playerDetailsContainer = $('.player-details-container');
+
+    // remove loading class and add loaded class to main container
+    $playerDetailsContainer.removeClass('loading').addClass('loaded');
+
+    var counter = 0;
+    var $clipContainer = $view.find('.clip-container');
+    var clipTable = {};
+
+    $.each(data, function() {
+
+      var clipData = this;
+      console.log('each loop: ', clipData);
+
+      var clipImage = '<img class="img-responsive" src="' + clipData.thumbnails[0].uri + '" alt="' + clipData.titleName + '" />';
+
+      var clip = '<a href="' + clipData.gameClipUris[0].uri + '">' + clipImage + '</a>';
+
+      $clipContainer.append(clip);
+    });
   }
 }
 
