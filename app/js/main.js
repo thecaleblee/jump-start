@@ -349,8 +349,11 @@ function renderGamerClips($view, options) {
 
     var counter = 0;
     var $clipContainer = $view.find('.clip-container');
-    var clipTable = {};
+    var clipArray = [];
+    var clipsObject = {};
+    var test = [];
 
+    // build clip array
     $.each(data, function() {
 
       var clipData = this;
@@ -360,8 +363,24 @@ function renderGamerClips($view, options) {
 
       var clip = '<a href="' + clipData.gameClipUris[0].uri + '">' + clipImage + '</a>';
 
-      $clipContainer.append(clip);
+      var column = '<div class="col-sm-6">' + clip + '</div>';
+
+      clipsObject.column_$counter  = column;
+
+
+      clipArray.push( column );
+
+      counter++
+
+      if ( counter == 1 ) {
+        test.push( clipsArray );
+
+        clipArray.length = 0;
+        
+        counter = 0;
+      }
     });
+    console.log( clipsObject );
   }
 }
 
