@@ -23,11 +23,13 @@
     "gulp-cache": "^0.4.6",
     "gulp-connect-php": "^1.0.1",
     "gulp-cssnano": "^2.1.2",
+    "gulp-db": "0.0.1",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.2",
+    "manage-database": "^0.2.1",
     "run-sequence": "^2.0.0"
   }
 }
