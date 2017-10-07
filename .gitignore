@@ -3,4 +3,3 @@ dist/*
 *.orig
 **/node_modules/*
 app/css/*
-conf/*
