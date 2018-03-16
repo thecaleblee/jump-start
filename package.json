@@ -1,6 +1,6 @@
 {
   "name": "jump-start",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "app/index.html",
   "scripts": {
@@ -19,14 +19,17 @@
   "devDependencies": {
     "browser-sync": "^2.18.12",
     "del": "^3.0.0",
+    "graceful-fs": "^4.1.11",
     "gulp": "^3.9.1",
     "gulp-cache": "^0.4.6",
     "gulp-cssnano": "^2.1.2",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.3.0",
+    "gulp-load-plugins": "^1.5.0",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.2",
+    "minimatch": "^3.0.4",
     "run-sequence": "^2.0.0"
   }
 }
